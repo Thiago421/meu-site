@@ -1,34 +1,63 @@
-const webhookURL = "https://discord.com/api/webhooks/1462633441928417281/VqRNeGLjfBgY-ho83VXhCvkeQzeMmA70oQOxvvMcVTD_QEcipgxMNDxp4b2OO75zXRKm";
+/* Fundo */
+body {
+    margin: 0;
+    height: 100vh;
+    background: radial-gradient(circle at top, #1b2735, #090a0f);
+    font-family: Arial, sans-serif;
+    overflow: hidden;
+}
 
-function enviar() {
-    const nome = document.getElementById("nome").value;
-    const texto = document.getElementById("texto").value;
+/* Camada das estrelas */
+.stars {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+}
 
-    if (!nome || !texto) {
-        alert("Preencha tudo!");
-        return;
-    }
+/* Estrelas individuais */
+.stars span {
+    position: absolute;
+    background: white;
+    border-radius: 50%;
+    opacity: 0.8;
+}
 
-    const mensagem = {
-        content: 
-            "** Novo envio recebido**\n\n" +
-            "** Nome:** " + nome + "\n" +
-            "** Texto:**\n" + texto
-   };
+/* Conteúdo acima das estrelas */
+.container {
+    position: relative;
+    z-index: 1;
+    width: 500px;
+    margin: auto;
+    top: 50%;
+    transform: translateY(-50%);
+    display: flex;
+    flex-direction: column;
+    gap: 35px;
+}
 
-    fetch(webhookURL, {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json"
-        },
-        body: JSON.stringify(mensagem)
-    })
-    .then(() => {
-        alert("Enviado com sucesso!");
-        document.getElementById("nome").value = "";
-        document.getElementById("texto").value = "";
-    })
-    .catch(() => {
-        alert("Erro ao enviar ??");
-    });
+input, textarea {
+    padding: 14px;
+    border-radius: 10px;
+    border: none;
+    font-size: 16px;
+    outline: none;
+}
+
+textarea {
+    height: 150px;
+    resize: none;
+}
+
+button {
+    width: 120px;
+    align-self: center;
+    padding: 10px;
+    border-radius: 8px;
+    border: none;
+    background-color: #888;
+    color: white;
+    cursor: pointer;
 }
