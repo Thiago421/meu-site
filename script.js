@@ -1,29 +1,31 @@
-function criarEstrela() {
-  const estrela = document.createElement("div");
+const WEBHOOK_URL = "https://discord.com/api/webhooks/1462633441928417281/VqRNeGLjfBgY-ho83VXhCvkeQzeMmA70oQOxvvMcVTD_QEcipgxMNDxp4b2OO75zXRKm";
 
-  estrela.style.position = "fixed";
-  estrela.style.left = Math.random() * window.innerWidth + "px";
-  estrela.style.bottom = "-5px";
-  estrela.style.width = "2px";
-  estrela.style.height = "2px";
-  estrela.style.background = "white";
-  estrela.style.opacity = "0.9";
-  estrela.style.zIndex = "1";
+function enviar() {
+  const nome = document.getElementById("nome").value;
+  const texto = document.getElementById("texto").value;
 
-  document.body.appendChild(estrela);
+  if (!nome || !texto) {
+    alert("Preencha tudo");
+    return;
+  }
 
-  let pos = -5;
-  const vel = Math.random() * 1.5 + 0.5;
+  const payload = {
+    content: `📩 **Novo envio do site**\n👤 Nome: ${nome}\n📝 Texto:\n${texto}`
+  };
 
-  const anim = setInterval(() => {
-    pos += vel;
-    estrela.style.bottom = pos + "px";
-
-    if (pos > window.innerHeight) {
-      clearInterval(anim);
-      estrela.remove();
-    }
-  }, 16);
+  fetch(WEBHOOK_URL, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify(payload)
+  })
+  .then(() => {
+    alert("Enviado pro Discord!");
+    document.getElementById("texto").value = "";
+  })
+  .catch(err => {
+    alert("Erro ao enviar");
+    console.error(err);
+  });
 }
-
-setInterval(criarEstrela, 80);
