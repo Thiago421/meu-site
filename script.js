@@ -1,63 +1,47 @@
-/* Fundo */
-body {
-    margin: 0;
-    height: 100vh;
-    background: radial-gradient(circle at top, #1b2735, #090a0f);
-    font-family: Arial, sans-serif;
-    overflow: hidden;
+const starsContainer = document.querySelector(".stars");
+const totalStars = 120;
+
+for (let i = 0; i < totalStars; i++) {
+    const star = document.createElement("span");
+
+    const size = Math.random() * 2 + 1;
+    star.style.width = size + "px";
+    star.style.height = size + "px";
+
+    star.style.left = Math.random() * window.innerWidth + "px";
+    star.style.top = Math.random() * window.innerHeight + "px";
+
+    star.speed = Math.random() * 0.6 + 0.2;
+
+    starsContainer.appendChild(star);
 }
 
-/* Camada das estrelas */
-.stars {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    z-index: 0;
+function animateStars() {
+    document.querySelectorAll(".stars span").forEach(star => {
+        let top = parseFloat(star.style.top);
+        top -= star.speed;
+
+        if (top < 0) {
+            top = window.innerHeight;
+            star.style.left = Math.random() * window.innerWidth + "px";
+        }
+
+        star.style.top = top + "px";
+    });
+
+    requestAnimationFrame(animateStars);
 }
 
-/* Estrelas individuais */
-.stars span {
-    position: absolute;
-    background: white;
-    border-radius: 50%;
-    opacity: 0.8;
-}
+animateStars();
 
-/* Conteúdo acima das estrelas */
-.container {
-    position: relative;
-    z-index: 1;
-    width: 500px;
-    margin: auto;
-    top: 50%;
-    transform: translateY(-50%);
-    display: flex;
-    flex-direction: column;
-    gap: 35px;
-}
+function enviar() {
+    const nome = document.getElementById("nome").value;
+    const texto = document.getElementById("texto").value;
 
-input, textarea {
-    padding: 14px;
-    border-radius: 10px;
-    border: none;
-    font-size: 16px;
-    outline: none;
-}
+    if (!nome || !texto) {
+        alert("Preencha tudo!");
+        return;
+    }
 
-textarea {
-    height: 150px;
-    resize: none;
-}
-
-button {
-    width: 120px;
-    align-self: center;
-    padding: 10px;
-    border-radius: 8px;
-    border: none;
-    background-color: #888;
-    color: white;
-    cursor: pointer;
+    alert("Enviado por " + nome);
 }
