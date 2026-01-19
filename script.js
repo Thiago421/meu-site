@@ -1,3 +1,6 @@
+alert("script.js carregou");
+
+
 const starsContainer = document.querySelector(".stars");
 const totalStars = 120;
 
