@@ -11,22 +11,21 @@ html, body {
 
 body {
   background: black;
-  overflow: hidden;
   font-family: Arial, sans-serif;
+  overflow: hidden;
 }
 
-/* CONTEÚDO */
+/* CENTRALIZA TUDO */
 .container {
-  position: relative;
-  z-index: 10; /* fica acima das estrelas */
   height: 100vh;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  gap: 20px;
 }
 
-input {
+input, textarea {
   width: 260px;
   padding: 12px;
   font-size: 16px;
@@ -35,7 +34,14 @@ input {
   outline: none;
 }
 
-/* espaço extra */
-.espaco {
-  height: 30px;
+textarea {
+  resize: none;
+  height: 80px;
+}
+
+button {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
 }
